@@ -1,1 +1,93 @@
-/* YeyeYeee código aquí */
+body {
+	background-color: #303032;
+}
+
+/* LOGO */ 
+
+.img-principal{
+	padding-top: 100px;
+	width: 150px;
+}
+
+.trans-logo{
+	font-weight: 600;
+	font-size: 40px;
+	color: #F29809;
+	margin: 0;
+}
+
+/* DATOS FORMULARIO */ 
+
+#mail,
+#pass {
+	background-color: #FFF;
+	margin:0;
+	padding: 4px 0;
+}
+
+.btn {
+	width: 100%;
+	background-color: #F29809;
+	color: #303032;
+}
+
+.remember-pass p {
+	padding-top: 10px;
+	margin: 0;
+	color: white;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]) {
+	border-bottom: 1px solid #F29809;
+    box-shadow: 0 1px 0 0 #F29809;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly])+label {
+	color: #F29809;
+}
+
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
+
+.form-datos {
+  position: relative;
+  color: #aaa;
+  font-size: 16px;
+}
+
+.form-datos input {
+  width: 250px;
+  height: 32px;
+
+  background: #fcfcfc;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
+}
+
+.form-datos input { 
+	text-indent: 32px;
+}
+
+.form-datos .fa-user { 
+  position: absolute;
+  top: 16px;
+  left: 10px;
+  font-size: 20px;
+}
+
+.form-datos .fa-lock { 
+  position: absolute;
+  top: 68px;
+  left: 10px;
+  font-size: 20px;
+}
+
+/* REGISTRO */ 
+
+.no-cuenta h6 {
+	color: white;
+}
+
+.no-cuenta b {
+	color: #F29809;
+}
