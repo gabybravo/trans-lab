@@ -32,8 +32,8 @@ input[type=text]:not(.browser-default):focus:not([readonly])+label {
 	margin-top: 30px;
 }
 
-#div-vacio-tarjeta,
-#select-vacio-tarifa{
+#div-vacio,
+#select-vacio {
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -45,24 +45,28 @@ input[type=text]:not(.browser-default):focus:not([readonly])+label {
 	display: none;
 }
 
-.caja-tarifa,
-.caja-valor-horario {
-	margin-top: 20px;
+.cont-tarifa,
+.cont-valor-horario {
+	margin-top: 5px;
 	width: 100%;
 	background-color: #F29809;
 }
 
-.total-text {
-	background-color: #303032;
+.mostrar-saldo {
+	background-color: white;
 }
 
-.total-text h6 {
+.mostrar-saldo h6 {
 	color: #FFF;
 	padding: 10px;
 }
 
-.caja-tarifa h4,
-.caja-valor-horario h4 {
+.cont-tarifa h4,
+.cont-valor-horario h4 {
 	padding-top: 10px;
 	padding-bottom: 15px;	
+}
+
+h6 {
+	margin: 1.4rem 0 .4rem 0;
 }
