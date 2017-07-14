@@ -1,1 +1,4 @@
-/* Holiii acá va tu código también */
+//Menú lateral retractil:
+$(document).ready(function(){
+    $(".button-collapse").sideNav();
+  })

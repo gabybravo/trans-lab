@@ -1,0 +1,27 @@
+body {
+	background-color: #D5D6D9;
+}
+
+nav {
+	background-color: #303032;
+}
+
+.botones {
+	margin-top: 150px;
+}
+
+.btn {
+	width: 100%;
+	background-color: #F29809;
+}
+
+
+.side-nav li>a>i {
+	color: #F29809;
+}
+
+.side-nav li>a {
+    font-size: 15px;
+    font-weight: 300;
+    padding: 20px 32px;
+}
