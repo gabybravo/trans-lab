@@ -115,3 +115,244 @@ $(document).ready(function(){
       `);
     });  
   }  
+
+	  /* Tarifa Tarjetas BIP */
+
+	  $('#btn-calcular').click(function(){
+	    $("#lo-calculado").empty();
+	    console.log($("#tarjeta-numero").val());
+
+	    if(!(/^\d{8}([0-9])*$/.test($("#tarjeta-numero").val())) ){
+	      $("#tarjeta-numero").append($("#tarjeta-numero").val("Error"));
+	    }else{  
+	      callbacksAjaxBipTarifa($("#tarjeta-numero").val());
+	    }
+	  });
+
+	  $('#btn-calcular').click(function(){
+	    $("#lo-calculado").empty();
+	    if($("#select-tarjeta").val() == ""){
+	      alert("Escoge una opción")
+	    }else{      
+	      console.log($("#select-tarjeta").val());
+	      callbacksAjaxBipTarifaSelect($("#select-tarjeta").val());
+	    }
+	  });
+
+	  var callbacksAjaxBipTarifa = function(num){
+	    $.ajax({
+	      url: 'http://bip-servicio.herokuapp.com/api/v1/solicitudes.json?bip=' + num,
+	      type: 'GET',
+	      dataType: 'json',
+	    })
+	    .done(function(response){    
+	      var saldo = response.saldoTarjeta;
+	      console.log(saldo);
+	      var corte = saldo.slice(1,saldo.length);
+	      var saldoFinal = corte.replace(".","");
+	      console.log(saldoFinal);
+
+	      if($("#select-tarifa").val() == ""){
+	        aler("Selecciona Horario Valido");
+	      }else if($("#select-tarifa").val() == "740"){
+	        var alto = parseInt(saldoFinal) - 740;
+	        console.log(alto);
+	        var text = $("#lo-calculado").append(`
+	          <div class="caja-valor-horario">
+	            <div class="row">
+	              <div class="col s12 center total-text">
+	                <h6>COSTO PASAJE</h6>
+	              </div>
+	            </div>
+	            <div class="row">
+	              <div class="col s12 center saldo-text">
+	                <h4> $ 740 </h4>
+	              </div>
+	            </div>
+	          </div>           
+	          <div class="caja-tarifa">
+	            <div class="row">
+	              <div class="col s12 center total-text">
+	                <h6>SALDO FINAL</h6>
+	              </div>
+	            </div>
+	            <div class="row">
+	              <div class="col s12 center saldo-text">
+	                <h4>$`+ alto +`</h4>
+	              </div>
+	            </div>
+	          </div> 
+	        `)
+	        return text;        
+	      }else if($("#select-tarifa").val() == "680"){
+	        var medio = parseInt(saldoFinal) - 680;
+	        console.log(medio);
+	        var text = $("#lo-calculado").append(`
+	          <div class="caja-valor-horario">
+	            <div class="row">
+	              <div class="col s12 center total-text">
+	                <h6>COSTO PASAJE</h6>
+	              </div>
+	            </div>
+	            <div class="row">
+	              <div class="col s12 center saldo-text">
+	                <h4> $ 740 </h4>
+	              </div>
+	            </div>
+	          </div>           
+	          <div class="caja-tarifa">
+	            <div class="row">
+	              <div class="col s12 center total-text">
+	                <h6>SALDO FINAL</h6>
+	              </div>
+	            </div>
+	            <div class="row">
+	              <div class="col s12 center saldo-text">
+	                <h4>$`+ medio +`</h4>
+	              </div>
+	            </div>
+	          </div> 
+	        `)
+	        return text;  
+	      }else if($("#select-tarifa").val() == "640"){
+	        var bajo = parseInt(saldoFinal) - 640;
+	        console.log(bajo);
+	        var text = $("#lo-calculado").append(`
+	          <div class="caja-valor-horario">
+	            <div class="row">
+	              <div class="col s12 center total-text">
+	                <h6>COSTO PASAJE</h6>
+	              </div>
+	            </div>
+	            <div class="row">
+	              <div class="col s12 center saldo-text">
+	                <h4> $ 740 </h4>
+	              </div>
+	            </div>
+	          </div>           
+	          <div class="caja-tarifa">
+	            <div class="row">
+	              <div class="col s12 center total-text">
+	                <h6>SALDO FINAL</h6>
+	              </div>
+	            </div>
+	            <div class="row">
+	              <div class="col s12 center saldo-text">
+	                <h4>$`+ bajo +`</h4>
+	              </div>
+	            </div>
+	          </div> 
+	        `)
+	        return text; 
+	      }                
+	    });
+	  }
+
+	  var callbacksAjaxBipTarifaSelect = function(num){
+	    $.ajax({
+	      url: 'http://bip-servicio.herokuapp.com/api/v1/solicitudes.json?bip=' + num,
+	      type: 'GET',
+	      dataType: 'json',
+	    })
+	    .done(function(response){    
+	      var saldo = response.saldoTarjeta;
+	      console.log(saldo);
+	      var corte = saldo.slice(1,saldo.length);
+	      var saldoFinal = corte.replace(".","");
+	      console.log(saldoFinal);
+
+	      if($("#select-tarifa").val() == ""){
+	        aler("Selecciona Horario Valido");
+	      }else if($("#select-tarifa").val() == "740"){
+	        var alto = parseInt(saldoFinal) - 740;
+	        console.log(alto);
+	        var text = $("#lo-calculado").append(`
+	          <div class="caja-valor-horario">
+	            <div class="row">
+	              <div class="col s12 center total-text">
+	                <h6>COSTO PASAJE</h6>
+	              </div>
+	            </div>
+	            <div class="row">
+	              <div class="col s12 center saldo-text">
+	                <h4> $ 740 </h4>
+	              </div>
+	            </div>
+	          </div>           
+	          <div class="caja-tarifa">
+	            <div class="row">
+	              <div class="col s12 center total-text">
+	                <h6>SALDO FINAL</h6>
+	              </div>
+	            </div>
+	            <div class="row">
+	              <div class="col s12 center saldo-text">
+	                <h4>$`+ alto +`</h4>
+	              </div>
+	            </div>
+	          </div> 
+	        `)
+	        return text;        
+	      }else if($("#select-tarifa").val() == "680"){
+	        var medio = parseInt(saldoFinal) - 680;
+	        console.log(medio);
+	        var text = $("#lo-calculado").append(`
+	          <div class="caja-valor-horario">
+	            <div class="row">
+	              <div class="col s12 center total-text">
+	                <h6>COSTO PASAJE</h6>
+	              </div>
+	            </div>
+	            <div class="row">
+	              <div class="col s12 center saldo-text">
+	                <h4> $ 740 </h4>
+	              </div>
+	            </div>
+	          </div>           
+	          <div class="caja-tarifa">
+	            <div class="row">
+	              <div class="col s12 center total-text">
+	                <h6>SALDO FINAL</h6>
+	              </div>
+	            </div>
+	            <div class="row">
+	              <div class="col s12 center saldo-text">
+	                <h4>$`+ medio +`</h4>
+	              </div>
+	            </div>
+	          </div> 
+	        `)
+	        return text;  
+	      }else if($("#select-tarifa").val() == "640"){
+	        var bajo = parseInt(saldoFinal) - 640;
+	        console.log(bajo);
+	        var text = $("#lo-calculado").append(`
+	          <div class="caja-valor-horario">
+	            <div class="row">
+	              <div class="col s12 center total-text">
+	                <h6>COSTO PASAJE</h6>
+	              </div>
+	            </div>
+	            <div class="row">
+	              <div class="col s12 center saldo-text">
+	                <h4> $ 740 </h4>
+	              </div>
+	            </div>
+	          </div>           
+	          <div class="caja-tarifa">
+	            <div class="row">
+	              <div class="col s12 center total-text">
+	                <h6>SALDO FINAL</h6>
+	              </div>
+	            </div>
+	            <div class="row">
+	              <div class="col s12 center saldo-text">
+	                <h4>$`+ bajo +`</h4>
+	              </div>
+	            </div>
+	          </div> 
+	        `)
+	        return text; 
+	      }                
+	    });
+	  } 

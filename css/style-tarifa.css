@@ -1,0 +1,68 @@
+body {
+	background-color: #D5D6D9;
+}
+
+nav {
+	background-color: #303032;
+}
+
+.side-nav li>a>i {
+	color: #F29809;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=text]:not(.browser-default).valid {
+	border-bottom: 1px solid #F29809;
+    box-shadow: none;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly])+label {
+	color: #F29809;
+}
+
+.btn, .btn:hover {
+	background-color: #F29809;
+}
+
+.btn:focus {
+    background-color: #CC7400;
+}
+
+.section-saldo {
+	margin-top: 30px;
+}
+
+#div-vacio-tarjeta,
+#select-vacio-tarifa{
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top:0;
+}
+
+.remove {
+	display: none;
+}
+
+.caja-tarifa,
+.caja-valor-horario {
+	margin-top: 20px;
+	width: 100%;
+	background-color: #F29809;
+}
+
+.total-text {
+	background-color: #303032;
+}
+
+.total-text h6 {
+	color: #FFF;
+	padding: 10px;
+}
+
+.caja-tarifa h4,
+.caja-valor-horario h4 {
+	padding-top: 10px;
+	padding-bottom: 15px;	
+}
