@@ -1,0 +1,52 @@
+body {
+	background-color: #D5D6D9;
+}
+
+nav {
+	background-color: #303032;
+}
+
+.side-nav li>a>i {
+	color: #F29809;
+}
+
+.numero-tarjetas {
+	padding: 50px 0;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=text]:not(.browser-default).valid {
+	border-bottom: 1px solid #F29809;
+    box-shadow: none;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly])+label {
+	color: #F29809;
+}
+
+.btn, .btn:hover {
+	background-color: #F29809;
+}
+
+.btn:focus {
+    background-color: #CC7400;
+}
+
+.cont-saldo {
+	width: 100%;
+	background-color: #F29809;
+}
+
+.total-saldo {
+	background-color: #303032;
+}
+
+.total-saldo h6 {
+	color: #FFF;
+	padding: 10px;
+}
+
+.mostrar-saldo h4 {
+	padding-top: 10px;
+	padding-bottom: 15px;	
+}

@@ -35,7 +35,6 @@ $(document).ready(function(){
 
     var tarjetaIngresada = $("#tarjeta").val();
     arr.push(tarjetaIngresada);
-    console.log(arr);
 
     $("#tarjetas-creadas").append(`
        <div class="caja">
@@ -50,3 +49,69 @@ $(document).ready(function(){
   });
 
 });
+
+	/* Selección de Tarjeta a consultar */
+  	var todasTarjetas = localStorage.getItem('todas-tarjetas');
+  	var str = JSON.parse('[' + todasTarjetas + ']');
+  	console.log(str);
+  
+  	str.forEach(function(e){
+    $('#select').append(`<option value="`+e+`">`+e+`</option>`)
+  	});
+
+  	str.forEach(function(e){
+    $('#select-tarjeta').append(`<option value="`+e+`">`+e+`</option>`)
+  	});
+
+	/* Saldo Tarjetas BIP */
+
+  	$('#btn-ver-saldo').click(function(){
+    	$("#saldo").empty();
+    console.log($("#tarjeta-saldo").val());
+
+    if(!(/^\d{8}([0-9])*$/.test($("#tarjeta-saldo").val())) ){
+      $("#tarjeta-saldo").append($("#tarjeta-saldo").val("Error"));
+    }else{     
+      console.log($("#tarjeta-saldo").val());
+      var valorTarjeta = $("#tarjeta-saldo").val();
+      callbacksAjaxBip(valorTarjeta);
+      $("#tarjeta-saldo").val("");
+    }
+  });
+
+  	$('#btn-ver-saldo').click(function(){
+    $("#saldo").empty();
+    if($("#select").val() == ""){
+      alert("Escoge una opción, por favor.")
+    }else{      
+      console.log($("#select").val());
+      var valorTarjetaS = $("#select").val();
+      callbacksAjaxBip(valorTarjetaS);
+    }
+  });
+
+  	/* Llamar a la API */
+  	var callbacksAjaxBip = function(num){
+    $.ajax({
+      url: 'http://bip-servicio.herokuapp.com/api/v1/solicitudes.json?bip=' + num,
+      type: 'GET',
+      dataType: 'json',
+    })
+    .done(function(response){    
+      var saldo = response.saldoTarjeta; 
+      $("#saldo").html(`
+        <div class="cont-saldo">
+          <div class="row">
+            <div class="col s12 center total-saldo">
+              <h6>SALDO TOTAL</h6>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s12 center mostrar-saldo">
+              <h4>`+ saldo +`</h4>
+            </div>
+          </div>
+        </div> 
+      `);
+    });  
+  }  
