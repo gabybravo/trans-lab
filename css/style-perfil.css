@@ -1,0 +1,60 @@
+body {
+	background-color: #D5D6D9;
+}
+
+nav {
+	background-color: #303032;
+}
+
+.side-nav li>a>i {
+	color: #F29809;
+}
+
+.fondo-perfil {
+	background-color: #F29809;
+	width: 100%;
+	height: 250px;
+	padding-top: 40px;
+	padding-left: 25%;
+}
+
+.fondo-perfil img {
+	width: 170px;
+	border-radius: 50%;
+	margin-left: 20px;
+}
+
+.cont-correo {
+	margin-top: 30px;
+	background-color: #FFF;
+	width: 100%;
+	height: 50px;
+}
+
+#correo-ingresado {
+	padding-top: 12px;
+	font-weight: 600;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]) {
+	border-bottom: 1px solid #F29809;
+    box-shadow: 0 1px 0 0 #F29809;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly])+label {
+	color: #F29809;
+}
+
+input[type=text]:not(.browser-default).valid {
+	border-bottom: 1px solid #F29809;
+    box-shadow: none;
+}
+
+.btn, .btn:hover {
+	width: 100%;
+	background-color: #F29809;
+}
+
+.btn:focus {
+    background-color: #CC7400;
+}
