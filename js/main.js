@@ -3,18 +3,17 @@ $(document).ready(function(){
   	$(".button-collapse").sideNav();
   	$('.collapsible').collapsible();
   	/* SELECT */
-  	$('select').material_select();
+  	$('select').material_select(); //Para inicializar el elemento select
 
 	/* Validación Index */
 	$("#sesion").click(function(event){
     if(!(/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/.test($("#mail").val()))){
    			$("#mail").append($("#mail").val("Error"));
   		}
-  		if(!(/^\d{8}([0-9])*$/.test($("#pass").val())) ){
+  		if(!(/^\d{8}([0-9])*$/.test($("#pass").val()))) {
    			$("#pass").append($("#pass").val("Error"));
-  		}
-  		else{
-  			$("#sesion").attr("href","home.html");
+  		} else {
+  			$("#sesion").attr("href","home.html"); //Si se valida correctamente abre home.html
         localStorage.setItem('mail',$("#mail").val());
         localStorage.setItem('num-tarjeta',$("#pass").val());       
   		}
@@ -22,13 +21,13 @@ $(document).ready(function(){
 
   
   	/* Mostrar e-mail en perfil */
-  	var mail = localStorage.getItem('mail');
+  	var mail = localStorage.getItem('mail'); //Devolver e-mail para mostrarlo en el html perfil
   	$('#correo-ingresado').html(mail); 
 
- 	var arr = [];
-
   	/* Capturar valor Tarjetas BIP */
+  	var arr = [];
   	$("#btn-tarjeta").click(function() {
+  	//Valido que el número de tarjeta tenga 8 dígitos:
     if(!(/^\d{8}([0-9])*$/.test($("#tarjeta").val())) ){
         $("#tarjeta").append($("#tarjeta").val("Error"));
     } else {
@@ -43,7 +42,6 @@ $(document).ready(function(){
      `);
       
     localStorage.setItem('todas-tarjetas',arr);
-    console.log(localStorage.getItem('todas-tarjetas'));
     $("#tarjeta").val("");       
     }
   });
@@ -52,45 +50,47 @@ $(document).ready(function(){
 
 	/* Selección de Tarjeta a consultar */
   	var todasTarjetas = localStorage.getItem('todas-tarjetas');
-  	var str = JSON.parse('[' + todasTarjetas + ']');
-  	console.log(str);
-  
-  	str.forEach(function(e){
-    $('#select').append(`<option value="`+e+`">`+e+`</option>`)
+  	//El texto que va entre () se convertirá a JSON.
+  	//Retorna el objeto que se corresponde con el texto JSON entregado.
+  	var string = JSON.parse('[' + todasTarjetas + ']');
+  	console.log(string);
+  	
+  	//Mostrar el valor de las tarjetas ingresadas en perfil.html en los select.
+  	string.forEach(function(e){
+    $('#select').append(`<option value="`+ e +`">`+ e +`</option>`)
   	});
 
-  	str.forEach(function(e){
-    $('#select-tarjeta').append(`<option value="`+e+`">`+e+`</option>`)
+  	string.forEach(function(e){
+    $('#select-tarjeta').append(`<option value="`+ e +`">`+ e +`</option>`)
   	});
 
 	/* Saldo Tarjetas BIP */
-
   	$('#btn-ver-saldo').click(function(){
-    	$("#saldo").empty();
+    	$("#saldo").empty(); //Remueve todos los nodos hijos.
     console.log($("#tarjeta-saldo").val());
-
+    //Validación del número de tarjeta BIP al escribirla en el input:
     if(!(/^\d{8}([0-9])*$/.test($("#tarjeta-saldo").val())) ){
       $("#tarjeta-saldo").append($("#tarjeta-saldo").val("Error"));
-    }else{     
+    } else {     
       console.log($("#tarjeta-saldo").val());
       var valorTarjeta = $("#tarjeta-saldo").val();
-      callbacksAjaxBip(valorTarjeta);
+      callbackAjaxBip(valorTarjeta); //Llamo la API
       $("#tarjeta-saldo").val("");
     }
   });
-
+  	//Validación del número de tarjeta BIP al escogerla del select:
   	$('#btn-ver-saldo').click(function(){
-    $("#saldo").empty();
+    $("#saldo").empty(); //Remueve todos los nodos hijos.
     if($("#select").val() == ""){
       alert("Escoge una opción, por favor.")
-    }else{      
+    } else {      
       console.log($("#select").val());
-      var valorTarjetaS = $("#select").val();
-      callbackAjaxBip(valorTarjetaS);
+      var valorTarjetas = $("#select").val();
+      callbackAjaxBip(valorTarjetas); //Llamo la API
     }
   });
 
-  	/* Llamar a la API */
+  	/* Llamar a la API para mostrar saldo */
   	var callbackAjaxBip = function(num){
     $.ajax({
       url: 'http://bip-servicio.herokuapp.com/api/v1/solicitudes.json?bip=' + num,
@@ -98,8 +98,8 @@ $(document).ready(function(){
       dataType: 'json',
     })
     .done(function(response){    
-      var saldo = response.saldoTarjeta; 
-      $("#saldo").html(`
+      var saldo = response.saldoTarjeta; //Muestro saldo en el html
+      $("#saldo").html(` 
         <div class="cont-saldo">
           <div class="row">
             <div class="col s12 center total-saldo">
@@ -118,23 +118,24 @@ $(document).ready(function(){
 
 	/* Tarifa Tarjetas BIP */
 	$('#btn-calcular').click(function() {
-	   $("#calculo-tarifa").empty();
+	   $("#calculo-tarifa").empty(); //Remueve todos los nodos hijos.
 	   console.log($("#tarjeta-numero").val());
 
+	   //Validación del número de tarjeta BIP al escribirla en el input:
 	   if(!(/^\d{8}([0-9])*$/.test($("#tarjeta-numero").val()))) {
 	      $("#tarjeta-numero").append($("#tarjeta-numero").val("Error"));
 	    } else {  
-	      callbackAjaxBipTarifa($("#tarjeta-numero").val());
+	      callbackAjaxBipTarifa($("#tarjeta-numero").val()); //Llamo a la API
 	    }
 	  });
-
+		//Validación de que el número de tarjeta BIP no esté vacío al escogerla del select:
 	  	$('#btn-calcular').click(function() {
 	    $("#calculo-tarifa").empty();
 	    if($("#select-tarjeta").val() == "") {
 	      alert("Escoge una opción, por favor.")
 	    } else {      
 	      console.log($("#select-tarjeta").val());
-	      callbackAjaxBipTarifaSelect($("#select-tarjeta").val());
+	      callbackAjaxBipTarifaSelect($("#select-tarjeta").val()); //Llamo a la API
 	    }
 	  });
 
@@ -147,10 +148,12 @@ $(document).ready(function(){
 	    .done(function(response) {    
 	      var saldo = response.saldoTarjeta;
 	      console.log(saldo);
+	      //Slice devuelve una copia de una parte del array dentro de un nuevo array 
+	      //empezando por inicio hasta fin (fin no incluido). El array original no se modificará.
 	      var corte = saldo.slice(1,saldo.length);
 	      var saldoFinal = corte.replace(".","");
 	      console.log(saldoFinal);
-
+	    // Validar que el select no esté vacío:
 	    if($("#select-tarifa").val() == "") {
 	        alert("Selecciona un horario válido, por favor.");
 	      } else if ($("#select-tarifa").val() == "740") {
@@ -195,7 +198,7 @@ $(document).ready(function(){
 	            </div>
 	            <div class="row">
 	              <div class="col s12 center mostrar-saldo">
-	                <h4> $ 640 </h4>
+	                <h4> $640 </h4>
 	              </div>
 	            </div>
 	          </div>           
